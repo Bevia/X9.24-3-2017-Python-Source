@@ -3,6 +3,7 @@ from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Random import get_random_bytes
 import binascii
 
+
 # DeriveKey class example using PBKDF2
 class DeriveKey:
     def __init__(self, password, salt, key_length=16):
@@ -13,8 +14,12 @@ class DeriveKey:
     def derive_key(self):
         return PBKDF2(self.password, self.salt, dkLen=self.key_length)
 
+
 # Example usage
-password = "my_secret_password"
+# password = "my_secret_password"
+
+# Generate a random, strong password and salt
+password = binascii.hexlify(get_random_bytes(16)).decode('utf-8')
 salt = get_random_bytes(16)
 derive_key = DeriveKey(password, salt)
 key = derive_key.derive_key()
